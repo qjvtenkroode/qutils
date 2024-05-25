@@ -1,4 +1,4 @@
-module qkroode.nl/qutils
+module github.com/qjvtenkroode/qutils
 
 go 1.22.3
 
