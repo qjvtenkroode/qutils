@@ -8,9 +8,9 @@ import (
 	"strings"
 
 	"github.com/prometheus/client_golang/prometheus"
-	"qkroode.nl/qutils/qdispatcher/worker"
-	"qkroode.nl/qutils/qlog"
-	"qkroode.nl/qutils/qmetrics"
+	"github.com/qjvtenkroode/qutils/qdispatcher/worker"
+	"github.com/qjvtenkroode/qutils/qlog"
+	"github.com/qjvtenkroode/qutils/qmetrics"
 )
 
 type Qdispatcher struct {

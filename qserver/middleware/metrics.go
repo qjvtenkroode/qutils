@@ -3,7 +3,7 @@ package middleware
 import (
 	"net/http"
 
-	"qkroode.nl/qutils/qmetrics"
+	"github.com/qjvtenkroode/qutils/qmetrics"
 )
 
 type MetricsMw struct {

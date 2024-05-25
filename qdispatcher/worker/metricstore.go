@@ -8,8 +8,8 @@ import (
 
 	"github.com/boltdb/bolt"
 	"github.com/prometheus/client_golang/prometheus"
-	"qkroode.nl/qutils/qlog"
-	"qkroode.nl/qutils/qmetrics"
+	"github.com/qjvtenkroode/qutils/qlog"
+	"github.com/qjvtenkroode/qutils/qmetrics"
 )
 
 var dbname = "test.bdb"

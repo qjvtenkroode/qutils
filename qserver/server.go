@@ -7,11 +7,11 @@ import (
 
 	"github.com/prometheus/client_golang/prometheus"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
-	"qkroode.nl/qutils/qdispatcher"
-	"qkroode.nl/qutils/qdispatcher/worker"
-	"qkroode.nl/qutils/qlog"
-	"qkroode.nl/qutils/qmetrics"
-	"qkroode.nl/qutils/qserver/middleware"
+	"github.com/qjvtenkroode/qutils/qdispatcher"
+	"github.com/qjvtenkroode/qutils/qdispatcher/worker"
+	"github.com/qjvtenkroode/qutils/qlog"
+	"github.com/qjvtenkroode/qutils/qmetrics"
+	"github.com/qjvtenkroode/qutils/qserver/middleware"
 )
 
 type Config struct {

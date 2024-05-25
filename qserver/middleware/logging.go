@@ -3,7 +3,7 @@ package middleware
 import (
 	"net/http"
 
-	"qkroode.nl/qutils/qlog"
+	"github.com/qjvtenkroode/qutils/qlog"
 )
 
 type LoggingMw struct {
