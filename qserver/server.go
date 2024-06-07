@@ -7,8 +7,6 @@ import (
 
 	"github.com/prometheus/client_golang/prometheus"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
-	"github.com/qjvtenkroode/qutils/qdispatcher"
-	"github.com/qjvtenkroode/qutils/qdispatcher/worker"
 	"github.com/qjvtenkroode/qutils/qlog"
 	"github.com/qjvtenkroode/qutils/qmetrics"
 	"github.com/qjvtenkroode/qutils/qserver/middleware"
@@ -16,13 +14,11 @@ import (
 
 type Config struct {
     Addr string 
-    Dispatcher bool
     TemplatesDir string
 }
 
 type Qserver struct {
 	mux *http.ServeMux
-    dispatcher *qdispatcher.Qdispatcher 
     metrics *qmetrics.Metrics
 }
 
@@ -44,14 +40,6 @@ func (q Qserver) AddRoute(endpoint string, handler http.Handler) {
 }
 
 func (q Qserver) StartServer(c Config) {
-    if c.Dispatcher {
-        qlog.Info("Setting up qdispatcher")
-        dispatchch := make(chan worker.Message)
-        q.dispatcher, _ = qdispatcher.NewQdispatcher(dispatchch, q.metrics)
-        q.AddRoute("/message/", q.dispatcher.MessageHandler())
-        defer q.dispatcher.Stop()
-        go q.dispatcher.Start()
-    }
 	qlog.Info("Reading templates")
 
 	qlog.Info("Starting webserver")
