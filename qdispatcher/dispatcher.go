@@ -46,10 +46,6 @@ func NewQdispatcher(dispatchch chan worker.Message, metrics *qmetrics.Metrics) (
 
 func (q Qdispatcher) MessageHandler() http.Handler {
 	fn := func(w http.ResponseWriter, r *http.Request) {
-		if r.Method != http.MethodPost {
-			w.WriteHeader(http.StatusMethodNotAllowed)
-			return
-		}
 		topic := strings.Split(r.URL.Path, "/")[2]
 		payload := ""
 		if r.Body != nil {
@@ -103,6 +99,7 @@ func (q Qdispatcher) loop() {
 				w.AddMessage(msg)
 			} else {
 				qlog.Error(fmt.Sprintf("Topic doesn't exist: %s", msg))
+                q.metrics.Errors.With(prometheus.Labels{"worker": "dispatcher"}).Inc()
 			}
 		}
 	}

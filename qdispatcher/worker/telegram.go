@@ -52,6 +52,9 @@ func (t TelegramWorker) loop() {
 		case msg := <-t.messagech:
             resp, err := http.Get(fmt.Sprintf("https://api.telegram.org/bot%s/sendMessage?chat_id=%s&text=%s", t.access_token, t.chat_id, msg.Payload))
 			qlog.Info(fmt.Sprintf("Telegram API POST response: %s for message: %s", resp.Status, msg))
+            if resp.StatusCode != 200 {
+                t.metrics.Errors.With(prometheus.Labels{"worker": "telegram"}).Inc()
+            }
 			if err != nil {
 				qlog.Error(fmt.Sprintf("Telegram API POST failed: %s", err))
                 t.metrics.Errors.With(prometheus.Labels{"worker": "telegram"}).Inc()

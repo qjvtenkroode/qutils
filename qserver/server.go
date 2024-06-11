@@ -19,7 +19,7 @@ type Config struct {
 
 type Qserver struct {
 	mux     *http.ServeMux
-	metrics *qmetrics.Metrics
+	Metrics *qmetrics.Metrics
 }
 
 func NewServer() Qserver {
@@ -28,7 +28,7 @@ func NewServer() Qserver {
 	q.mux = http.NewServeMux()
 	qlog.Info("Setting up qmetrics prometheus")
 	reg := prometheus.NewRegistry()
-	q.metrics = qmetrics.NewMetrics(reg)
+	q.Metrics = qmetrics.NewMetrics(reg)
 	q.AddRoute("GET /metrics/", promhttp.HandlerFor(reg, promhttp.HandlerOpts{}))
 
 	return q
