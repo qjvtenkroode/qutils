@@ -13,23 +13,23 @@ import (
 )
 
 type Config struct {
-    Addr string 
-    TemplatesDir string
+	Addr         string
+	TemplatesDir string
 }
 
 type Qserver struct {
-	mux *http.ServeMux
-    metrics *qmetrics.Metrics
+	mux     *http.ServeMux
+	metrics *qmetrics.Metrics
 }
 
 func NewServer() Qserver {
 	q := Qserver{}
 	qlog.Info("Setting up ServeMux")
 	q.mux = http.NewServeMux()
-    qlog.Info("Setting up qmetrics prometheus")
-    reg := prometheus.NewRegistry()
-    q.metrics = qmetrics.NewMetrics(reg)
-	q.AddRoute("/metrics", promhttp.HandlerFor(reg, promhttp.HandlerOpts{}))
+	qlog.Info("Setting up qmetrics prometheus")
+	reg := prometheus.NewRegistry()
+	q.metrics = qmetrics.NewMetrics(reg)
+	q.AddRoute("GET /metrics/", promhttp.HandlerFor(reg, promhttp.HandlerOpts{}))
 
 	return q
 }
